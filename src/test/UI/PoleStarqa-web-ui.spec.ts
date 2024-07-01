@@ -7,17 +7,17 @@ import { DesignAndOrderPage } from "../../pages/DesignAndOrderPage";
 import { ShopAccessoriesPage } from "../../pages/ShopAccessoriesPage";
 
 test.describe.configure({ mode: 'parallel' });
-// let browser: Browser;
+let browser: Browser;
 
-// test.beforeEach(async ({ page }) => {
-//   browser = await chromium.launch();
-//   page = await browser.newPage();
-// });
+test.beforeEach(async ({ page }) => {
+  browser = await chromium.launch();
+  page = await browser.newPage();
+});
 
-// test.afterEach(async ({ page }) => {
-//   await page.close()
-//   await browser.close();
-// });
+test.afterEach(async ({ page }) => {
+  await page.close()
+  await browser.close();
+});
 
 test("Book Test driver for Existing customer", async ({ page }) => {
   test.setTimeout(150000);
@@ -30,14 +30,13 @@ test("Book Test driver for Existing customer", async ({ page }) => {
 
   await LoginPage.navigate();
   await shopAccessoriesPage.clickMenu();
-  // await bookTestDrivePage.AsserterifytheTitle();
-  // await bookTestDrivePage.AsssertModelTab();
+  await bookTestDrivePage.AsssertModelTab();
   await bookTestDrivePage.choosetheModel();
-  // await bookTestDrivePage.AsserttheModelSelected();
+  await bookTestDrivePage.AsserttheModelSelected();
   await bookTestDrivePage.clickLocationMenubtn();
-  // await LoginPage.verifyPopupHandle();
-  // await bookTestDrivePage.navigateToBooktestDrive();
-  // await bookTestDrivePage.selectVehicleAccessrios();
+  await LoginPage.verifyPopupHandle();
+  await bookTestDrivePage.navigateToBooktestDrive();
+  await bookTestDrivePage.selectVehicleAccessrios();
 
 });
 
@@ -61,12 +60,15 @@ test("Verify the Polestar design and order", async ({ page }) => {
 });
 
 
-test.only("Verify the Polestar Shop accessories", async ({ page }) => {
+test("Verify the Polestar Shop accessories", async ({ page },testInfo) => {
   test.setTimeout(150000);
   let LoginPage: loginPage;
   let shopAccessoriesPage: ShopAccessoriesPage;
   LoginPage = new loginPage(page);
   shopAccessoriesPage = new ShopAccessoriesPage(page);
+  await testInfo.attach("Home",{
+  body :await page.screenshot(),
+  })
   await LoginPage.navigate();
   await shopAccessoriesPage.clickMenu();
   await shopAccessoriesPage.selectshopMenu();

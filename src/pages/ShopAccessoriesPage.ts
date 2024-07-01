@@ -38,6 +38,7 @@ export class ShopAccessoriesPage {
 
   async selectshopMenu() {
     await this.page.getByRole('menuitem', { name: 'Shop' }).click();
+    // await this.page.screenshot({ path: "screenshots/Test.png" });
     await this.page.getByTestId('extras-link-container').getByRole('button', { name: 'Till vår webbshop' }).click();
   }
 

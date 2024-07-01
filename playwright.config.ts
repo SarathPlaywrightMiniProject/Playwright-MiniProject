@@ -19,7 +19,7 @@ export default defineConfig({
   workers: process.env.CI ? 4 : undefined,
 
   // Reporter to use
-  reporter: 'allure-playwright',
+  reporter: 'html',
 
   use: {
     // Base URL to use in actions like `await page.goto('/')`.
